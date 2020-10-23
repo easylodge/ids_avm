@@ -5,7 +5,7 @@ module IdsAvm::Search
     query_keys = [:state, :address_query]
     required_keys = [:address_query]
     validate_query_params(required_keys, options)
-    search('/properties/search', options.slice(*query_keys))
+    search('/properties/search', options.slice(*query_keys))['addresses']
   end
 
   def advanced_property(options={})
@@ -48,7 +48,7 @@ module IdsAvm::Search
 
   def property_images(property_id)
     raise("Please provide the property ID") unless property_id.present?
-    search("/properties/#{property_id}/images")
+    search("/properties/#{property_id}/images")['images']
   end
 
   def property_listings(property_id)
