@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'ids_avm/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "veda_idmatrix"
+  spec.name          = "ids_avm"
   spec.version       = IdsAvm::VERSION
   spec.authors       = ["Ekechi Ikenna"]
   spec.email         = ["ekechi.ikenna@gmail.com", "ie@easylodge.com.au", "support@easylodge.com.au"]
@@ -27,7 +27,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'shoulda-matchers', '~>2.8'
   spec.add_development_dependency 'pry'
 
-  spec.add_dependency "nokogiri"
   spec.add_dependency "httparty"
   spec.add_dependency 'activesupport'
 end

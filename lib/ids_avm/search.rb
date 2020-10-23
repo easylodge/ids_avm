@@ -1,17 +1,5 @@
-class IdsAvm::Search
-
-  def validate_path_params(title, value, permitted=[])
-    raise("#{title.capitalize} must be one of #{permitted.join(', ')}") unless permitted.include?(value)
-  end
-
-  def validate_query_params(required=[], query={})
-    query.deep_symbolize_keys!
-    required.all? { |s| query.key?(s) && query[s].present? || raise("Required value #{s} not provided.") }
-  end
-
-  def search(url, query={})
-    IdsAvm::Request.get(url, query)
-  end
+module IdsAvm::Search
+  extend self
 
   def property(options={})
     query_keys = [:state, :address_query]
@@ -79,7 +67,8 @@ class IdsAvm::Search
     restricted_values = [{ title: 'Region', incoming: options[:region], allowed: ['sa3', 'sa4', 'city', 'locality', 'postcode', 'lga'] },
                          { title: 'Interval', incoming: options[:interval], allowed: ['monthly', 'quarterly'] },
                          { title: 'Property type', incoming: options[:property_type], allowed: ['house', 'unit', 'dwelling'] },
-                         { title: 'Stat', incoming: options[:stat], allowed: ['tom', 'price', 'vee', 'yields', 'rents', 'salecounts', 'marketscore'] }, {  }]
+                         { title: 'Stat', incoming: options[:stat], allowed: ['tom', 'price', 'vee', 'yields', 'rents', 'salecounts', 'marketscore'] },
+                         { title: 'Level', incoming: options[:level], allowed: [] }]
 
     restricted_values.each do |set|
       validate_path_params(set[:title], set[:incoming], set[:allowed])
@@ -93,5 +82,20 @@ class IdsAvm::Search
     required_keys = query_keys - [:bedrooms]
     validate_query_params(required_keys, options)
     search("/localities/summary", options.slice(*query_keys))
+  end
+
+  private
+
+  def validate_path_params(title, value, permitted=[])
+    raise("#{title.capitalize} must be one of #{permitted.join(', ')}") unless permitted.include?(value)
+  end
+
+  def validate_query_params(required=[], query={})
+    query.deep_symbolize_keys!
+    required.all? { |s| query.key?(s) && query[s].present? || raise("Required value #{s} not provided.") }
+  end
+
+  def search(url, query={})
+    IdsAvm::Request.get(url, query)
   end
 end

@@ -1,8 +1,18 @@
-require 'active_record'
+require 'ids_avm/configuration'
+require 'ids_avm/request'
+require 'ids_avm/search'
 require 'ids_avm/version'
-require 'nokogiri'
 require 'httparty'
 require 'ids_avm/railtie' if defined?(Rails)
 
 module IdsAvm
+  extend self
+
+  def configuration
+    @configuration ||= Configuration.new
+  end
+
+  def configure
+    yield(configuration)
+  end
 end
