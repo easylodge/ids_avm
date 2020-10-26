@@ -34,7 +34,7 @@ module IdsAvm::Search
 
   def property_avm_detailed_estimate(property_id, options={})
     raise("Please provide the property ID") unless property_id.present?
-    query_keys = [:date, :landarea, :bathrooms, :bedrooms, :carparks, :max_estimate_range_percent, :desired_coverage_probability_percent]
+    query_keys = [:date, :landarea, :bathrooms, :bedrooms, :carparks, :property_type, :max_estimate_range_percent, :desired_coverage_probability_percent]
     options.deep_symbolize_keys!
     search("/properties/#{property_id}/estimates/detail", options.slice(*query_keys))
   end
