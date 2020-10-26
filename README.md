@@ -1,7 +1,7 @@
 # ids_avm
 IDS service integration
 
-Ruby gem to make API requests to https://www.ids.io/'s AVM public service. Website: [https://www.ids.io/](https://www.ids.io/)
+Ruby gem to make API requests to IDS's AVM public service. Website: [https://www.ids.io/](https://www.ids.io/)
 
 [API Guide](https://developer.ids.io/)
 
