@@ -5,9 +5,10 @@ require 'ids_avm/version'
 require 'httparty'
 require 'ids_avm/railtie' if defined?(Rails)
 
-class IdsAvm
-
+module IdsAvm
   class << self
+    attr_accessor :configuration
+
     def configuration
       @configuration ||= Configuration.new
     end
