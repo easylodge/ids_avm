@@ -1,6 +1,5 @@
 module IdsAvm::Search
   def property(options={})
-    binding.pry
     query_keys = [:state, :address_query]
     required_keys = [:address_query]
     validate_query_params(required_keys, options)
